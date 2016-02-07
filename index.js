@@ -10,11 +10,14 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-  response.render('pages/index');
+
+  response.render('pages/index',{
+    tutu:process.env.ROB_PASS
+  });
 });
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-
+console.log('rob');

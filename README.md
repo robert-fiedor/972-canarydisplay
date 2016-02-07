@@ -37,3 +37,29 @@ For more information about using Node.js on Heroku, see these Dev Center article
 - [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
 - [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
 - [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+
+
+
+
+https://devcenter.heroku.com/articles/config-vars
+
+
+$ heroku config:set S3_KEY=8N029N81 S3_SECRET=9s83109d3+583493190
+Setting config vars and restarting myapp... done, v14
+S3_KEY:   8N029N81
+S3_SECRET: 9s83109d3+583493190
+
+
+if (process.env.NODE_ENV.replace(/\W/g, '') == 'development') {
+  console.log('ok');
+}
+
+
+heroku local web
+
+SET NODE_ENV=production
+
+
+https://github.com/pselle/search-and-save
+http://www.hacksparrow.com/running-express-js-in-production-mode.html
+http://blog.taylormcgann.com/tag/bash_profile/

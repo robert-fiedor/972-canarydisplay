@@ -3,9 +3,11 @@ node_modules
 Dockerfile
 docker-compose.yml
 .idea
-
+idea
+.idea/
 
 /node_modules
 npm-debug.log
 .DS_Store
+/ignoredConfig.md
 /*.env
