@@ -1,11 +1,11 @@
 // modules =================================================
 var express        = require('express');
 var app            = express();
-var mongoose       = require('mongoose');
+//var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var cookieParser = require('cookie-parser');
-var expressSession = require('express-session');
+//var expressSession = require('express-session');
 
 var router = express.Router();
 
@@ -18,11 +18,11 @@ require('./app/models/photoshopModel.js');
 //.js
 var baseAppSettings = require('./config/baseappsettings');
 
-var mongoStore = require('connect-mongo')({session: expressSession});
+//var mongoStore = require('connect-mongo')({session: expressSession});
 var db = require('./config/db');
 
 var port = process.env.PORT || 8080; // set our port
-mongoose.connect(db.url); // connect to our mongoDB database (commented out after you enter in your own credentials)
+//mongoose.connect(db.url); // connect to our mongoDB database (commented out after you enter in your own credentials)
 
 // get all data/stuff of the body (POST) parameters
 app.use(bodyParser.json()); // parse application/json 
@@ -41,18 +41,18 @@ app.use(router);
 
 app.use(cookieParser());
 
-app.use(expressSession({
-
-    secret: 'SECRET',
-    cookie: {maxAge: 60*60*1000},
-    store: new mongoStore({
-        db: mongoose.connection.db,
-        collection: 'sessions',
-        db: 'venues'
-    }),
-    saveUninitialized: true,
-    resave: true
-}));
+//app.use(expressSession({
+//
+//    secret: 'SECRET',
+//    cookie: {maxAge: 60*60*1000},
+//    store: new mongoStore({
+//        db: mongoose.connection.db,
+//        collection: 'sessions',
+//        db: 'venues'
+//    }),
+//    saveUninitialized: true,
+//    resave: true
+//}));
 
 app.use(function(req, res, next) {
     res.locals.baseAppSettings = baseAppSettings;
