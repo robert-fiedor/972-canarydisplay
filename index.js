@@ -15,8 +15,16 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
 
-  db.kanarki.insert({yo:1})
-  //mongodb://canary:canary1@ds059185.mongolab.com:59185/canaries
+  db.kanarki.insert({yo:2})
+
+  response.render('pages/index',{
+    tutu:process.env.ROB_PASS
+  });
+});
+
+app.post('/', function(request, response) {
+
+  db.kanarki.insert({yo:2})
 
   response.render('pages/index',{
     tutu:process.env.ROB_PASS
@@ -27,4 +35,3 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-console.log('rob');
