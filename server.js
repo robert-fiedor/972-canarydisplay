@@ -3,7 +3,7 @@ console.log('!!! robgi')
 
 //// modules =================================================
 //var express        = require('express');
-//var app            = express();
+var app            = express();
 ////var mongoose       = require('mongoose');
 //var bodyParser     = require('body-parser');
 //var methodOverride = require('method-override');
@@ -34,13 +34,13 @@ console.log('!!! robgi')
 //
 //app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 //
-//app.engine('.html', require('ejs').__express);
+app.engine('.html', require('ejs').__express);
 //
-//app.set('views', __dirname + '/views');
-//app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+app.set('view engine', 'html');
 //
-//app.use(express.static(path.join(__dirname, 'public')));
-//app.use(router);
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(router);
 //
 //app.use(cookieParser());
 //
@@ -65,6 +65,6 @@ console.log('!!! robgi')
 //require('./app/routes')(app);
 //
 //// start app ===============================================
-//app.listen(port);
-//console.log('Magic happens on port ' + port);
-//exports = module.exports = app;
+app.listen(port);
+console.log('Magic happens on port ' + port);
+exports = module.exports = app;
