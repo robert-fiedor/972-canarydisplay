@@ -1,9 +1,25 @@
 var express = require('express');
 var app = express();
+var bodyParser  = require('body-parser');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 var mongojs = require('mongojs');
 
-var db = mongojs.connect('mongodb://canary:canary1@ds059185.mongolab.com:59185/canaries', ['kanarki'])
+var db_canary = mongojs.connect('mongodb://' +
+                                process.env.DB_LOGIN +
+                                ':' +
+                                process.env.DB_PASS +
+                                '@ds059185.mongolab.com:59185/canaries', ['kanarki']);
+
+var db_sanitychecks = mongojs.connect('mongodb://' +
+    process.env.DB_LOGIN +
+    ':' +
+    process.env.DB_PASS +
+    '@ds059185.mongolab.com:59185/canaries', ['sanitychecks']);
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -14,22 +30,40 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-
-  db.kanarki.insert({yo:2})
-
-  response.render('pages/index',{
-    tutu:process.env.ROB_PASS
-  });
+  response.render('pages/index');
 });
 
-app.post('/', function(request, response) {
-
-  db.kanarki.insert({yo:2})
-
-  response.render('pages/index',{
-    tutu:process.env.ROB_PASS
-  });
+app.post('/sanitychecks', function(req, res) {
+    db_sanitychecks.sanitychecks.insert(req.body);
+    res.json({msg: "sanitychecks Updated"});
 });
+
+app.get('/sanitychecks', function(req, res) {
+    db_sanitychecks.sanitychecks.find({}).limit(1).sort({$natural:-1},function (err, docs) {
+        res.json(docs);
+    });
+});
+
+
+
+
+
+
+
+
+
+//["sksk2"]
+
+
+//app.post('/canary', function(req, res) {
+//
+//    console.log('sanity', req.body)
+//
+//    db_sanitychecks.sanitychecks.insert(req.body);
+//    res.json({msg: "Customer Cart Updated"});
+//});
+
+
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

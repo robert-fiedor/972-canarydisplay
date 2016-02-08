@@ -6,16 +6,62 @@
 
 <body>
 
-  <% include ../partials/nav.ejs %>
 
 
-ROB BEFORE
+<div id="sanity-check-section">
+  <span>current sanity check array:</span>
+  <input id="sanity-check">
+</div>
 
-  <% tutu %>
+
+
 
   <script type='text/javascript'>
-    var rows =<%-JSON.stringify(tutu)%>
-    console.log('rows',rows)
+
+
+    ///////////////////////////////////
+
+    var sanityCheck = function(){
+
+      var currentSanityCheck;
+
+      $('#sanity-check').on('change', function(e){
+        currentSanityCheck = $('#sanity-check').val();
+        dbAccess.storeSanityCheck();
+      })
+      return {
+        currentSanityCheck : function(){ return currentSanityCheck}
+      }
+    }()
+
+    var dbAccess = function(){
+
+      var storeSanityCheck = function(){
+
+        $.ajax({
+          type: "POST",
+          url: '/sanitychecks',
+          data: {'sanityCheck':sanityCheck.currentSanityCheck()},
+          success: function(){
+            console.log('succ')
+          }
+        });
+
+      }
+
+      return {
+        storeSanityCheck : storeSanityCheck
+      }
+
+    }()
+
+
+
+
+
+
+
+
   </script>
 
 
