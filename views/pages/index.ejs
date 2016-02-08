@@ -6,15 +6,20 @@
 
 <body>
 
+<div id="currently-checking-sanity">
+  <span>Currently checking these:</span>
+</div>
+
+
+<div id="last-sanity-check-results"></div>
 
 
 <div id="sanity-check-section">
   <span>current sanity check array:</span>
-  <input id="sanity-check">
+  <input size="100" id="sanity-check">
 </div>
 
-
-
+<div id="canary-results"></div>
 
   <script type='text/javascript'>
 
@@ -55,19 +60,37 @@
 
     }()
 
+    var populateCanaryResults = function(){
+
+      $.ajax({
+        type: "GET",
+        url: '/canary',
+        success: function(data){
+          $('#canary-results').html(data[0])
+          console.log('canary results',data);
+        }
+      });
+    }
+
+    populateCanaryResults();
 
 
+    var populateCurrenltSavedSanityChecks = function(){
 
+      $.ajax({
+        type: "GET",
+        url: '/sanitychecks',
+        success: function(data){
+          $('#currently-checking-sanity').append(data[0].sanityCheck)
 
+          console.log('>>',data)
+        }
+      });
+    }
 
-
+    populateCurrenltSavedSanityChecks()
 
   </script>
-
-
-
-
-rob!
 
 </body>
 </html>

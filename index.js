@@ -44,6 +44,19 @@ app.get('/sanitychecks', function(req, res) {
     });
 });
 
+app.post('/canary', function(req, res) {
+    db_canary.kanarki.insert(req.body);
+    res.json({msg: "kanarki Updated"});
+});
+
+app.get('/canary', function(req, res) {
+    db_canary.kanarki.find({}).limit(50).sort({$natural:-1},function (err, docs) {
+        res.json(docs);
+    });
+});
+
+
+
 
 
 
