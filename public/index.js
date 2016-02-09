@@ -60,7 +60,7 @@ var populateCanaryResults = function(){
                 console.log('it!',sanityChecks)
 
                 _.each(sanityChecks, function(sCheck){
-                    div.append('   '+sCheck.item+'   ')
+                    div.append('<span class="check-item">'+sCheck.item+'</span>')
                     div.append(sCheck.found === true ? sCheck.found : 'false')
                 })
 
