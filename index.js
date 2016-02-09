@@ -56,28 +56,6 @@ app.get('/canary', function(req, res) {
 });
 
 
-
-
-
-
-
-
-
-
-
-//["sksk2"]
-
-
-//app.post('/canary', function(req, res) {
-//
-//    console.log('sanity', req.body)
-//
-//    db_sanitychecks.sanitychecks.insert(req.body);
-//    res.json({msg: "Customer Cart Updated"});
-//});
-
-
-
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });

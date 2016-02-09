@@ -7,90 +7,31 @@
 <body>
 
 <div id="currently-checking-sanity">
-  <span>Change sanity checks, delimit them using @@@ here's an example: abc@@@defgh@@@ijk</span>
+
+
+  <span>I have been checking for these sanity checks:</span>
+
+  <div>-----------------------------------</div>
+
+  <div id="previously-saved-sanity-check"></div>
+
+  <div>-----------------------------------</div>
+
 </div>
 
 
 <div id="last-sanity-check-results"></div>
 
+<span>To change sanity checks, delimit them using @@@      here's an example: abc@@@defgh@@@ijk</span>
 
 <div id="sanity-check-section">
-  <span>current sanity check array:</span>
   <input size="100" id="sanity-check">
 </div>
 
 <div id="canary-results"></div>
 
-  <script type='text/javascript'>
-
-
-    ///////////////////////////////////
-
-    var sanityCheck = function(){
-
-      var currentSanityCheck;
-
-      $('#sanity-check').on('change', function(e){
-        currentSanityCheck = $('#sanity-check').val();
-        dbAccess.storeSanityCheck();
-      })
-      return {
-        currentSanityCheck : function(){ return currentSanityCheck}
-      }
-    }()
-
-    var dbAccess = function(){
-
-      var storeSanityCheck = function(){
-
-        $.ajax({
-          type: "POST",
-          url: '/sanitychecks',
-          data: {'sanityCheck':sanityCheck.currentSanityCheck()},
-          success: function(){
-            console.log('succ')
-          }
-        });
-
-      }
-
-      return {
-        storeSanityCheck : storeSanityCheck
-      }
-
-    }()
-
-    var populateCanaryResults = function(){
-
-      $.ajax({
-        type: "GET",
-        url: '/canary',
-        success: function(data){
-          $('#canary-results').html(data[0])
-          console.log('canary results',data);
-        }
-      });
-    }
-
-    populateCanaryResults();
-
-
-    var populateCurrenltSavedSanityChecks = function(){
-
-      $.ajax({
-        type: "GET",
-        url: '/sanitychecks',
-        success: function(data){
-          $('#currently-checking-sanity').append(data[0].sanityCheck)
-
-          console.log('>>',data)
-        }
-      });
-    }
-
-    populateCurrenltSavedSanityChecks()
-
-  </script>
+  <!--<script type='text/javascript'></script>-->
+  <script src="index.js"></script>
 
 </body>
 </html>
