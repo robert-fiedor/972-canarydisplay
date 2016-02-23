@@ -53,7 +53,7 @@ var populateCanaryResults = function(){
 
                 //item = JSON.parse(item.sanityCheckResult)
 
-                var div = $('<div>'+ new Date(item.date) +'</div>');
+                var div = $('<div>'+ new Date(Number(item.date)) +'</div>');
 
                 var sanityChecks=item.sanityChecks;
 
